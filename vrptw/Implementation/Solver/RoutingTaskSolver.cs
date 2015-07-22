@@ -329,7 +329,7 @@ namespace Implementation.Solver
 
             List<int> unusedVehicles = q.Select((x, i) => i + 1).Where(x => !usedVehicles.Contains(x)).ToList(); //without used
 
-            for (int i = 0; i < solution.Routes.Count - 1; ++i)
+            for (int i = 0; i < solution.Routes.Count; ++i)
             {
                 foreach (var x in unusedVehicles)
                 {
@@ -469,7 +469,7 @@ namespace Implementation.Solver
 
                 if (r.Vehicle == 0)
                 {
-                    totalVehicleCost += q0 * 10;
+                    totalVehicleCost += q0 * 20;
                 }
                 else
                 {
@@ -479,7 +479,7 @@ namespace Implementation.Solver
                 totalPenalty += getMinPenalty(r);
             }
 
-            double result = alpha * totalTime + beta * totalPenalty + 0.03 * totalVehicleCost;
+            double result = alpha * totalTime + beta * totalPenalty + alpha * totalVehicleCost;
 
             details.AppendFormat("Target function value = {0}\nTotal travel time = {1}\nTotal penalty = {2}\nTotal vehicle cost = {3}\n", result, totalTime, totalPenalty, totalVehicleCost);
             
